@@ -17,17 +17,13 @@ function split(wholeArray) {
 function merge(firstHalf, secondHalf) {
     let combinedArray = [];
     const targetLength = firstHalf.length + secondHalf.length
-    while (combinedArray.length !== targetLength) {
-        if (firstHalf.length === 0) {
-            combinedArray = combinedArray.concat(secondHalf);
-        } else if (secondHalf.length === 0) {
-            combinedArray = combinedArray.concat(firstHalf);
-        } else if (firstHalf[0] < secondHalf[0]) {
-            combinedArray.push(firstHalf.splice(0, 1)[0]);
-        } else {
-            combinedArray.push(secondHalf.splice(0, 1)[0]);
-        }
+    while(firstHalf.length && secondHalf.length) {
+        (firstHalf[0] < secondHalf[0])
+            ? combinedArray.push(firstHalf.splice(0, 1)[0])
+            : combinedArray.push(secondHalf.splice(0, 1)[0]);
     }
+    combinedArray = [...combinedArray, ...firstHalf, ...secondHalf]
+
     return combinedArray;
 }
 
